@@ -10,6 +10,7 @@ const path         = require('path');
 
 require('./config/db.config');
 require('./config/hbs.config');
+const session = require('./config/session.config');
 
 
 const app_name = require('./package.json').name;
@@ -35,6 +36,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+app.use(session);
 
 // Routes setup
 const router = require('./config/routes.js');
