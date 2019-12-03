@@ -38,6 +38,11 @@ const userSchema = new mongoose.Schema({
     minlength: [8, 'Password needs at least 8 characters']
   },
 
+  lastPeriod: {
+    type: Date,
+    required: true
+  },
+
   validationToken: {
     type: String,
     default: generateRandomToken
