@@ -7,7 +7,7 @@ const babySchema = new mongoose.Schema({
     required: true
   },
 
-  age: {
+  weeks: {
     type: Number,
     required: true,
   },
