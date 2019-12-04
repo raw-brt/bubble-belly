@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const express      = require('express');
 const favicon      = require('serve-favicon');
 const logger       = require('morgan');
-const path         = require('path');
 
 require('./config/db.config');
 require('./config/hbs.config');
@@ -53,8 +52,8 @@ app.use((req, res, next) => {
 // default value for title local
 app.locals.title = 'Bubble-Belly';
 
-const index = require('./routes/index');
-app.use('/', index);
+// const index = require('./routes/index');
+// app.use('/', index);
 
 /** 
  * Listen on provided port

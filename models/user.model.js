@@ -1,6 +1,7 @@
 const mongoose      = require('mongoose');
 const bcrypt        = require('bcrypt');
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const SALT_WORK_FACTOR = 10;
 
 // Random to taken to allow account validation through email
 const generateRandomToken = () => {
@@ -14,16 +15,14 @@ const userSchema = new mongoose.Schema({
     minLength: [8, 'Name needs at least 8 characters'],
     trim: true
   },
-
   email: {
     type: String,
     required: [true, 'Please, type an email'],
     unique: true,
     trim: true,
-    lowecase: true,
+    lowercase: true,
     match: [EMAIL_PATTERN, 'Email is invalid']
   },
-
   username: {
     type: String,
     required: [true, 'Please, type an username'],
@@ -31,28 +30,69 @@ const userSchema = new mongoose.Schema({
     trim: true,
     lowercase: true
   },
-
   password: {
     type: String,
     required: [true, 'Password is required'],
     minlength: [8, 'Password needs at least 8 characters']
   },
-
+  birthDate: {
+    type: String,
+  },
   lastPeriod: {
-    type: Date,
+    type: String,
     required: true
   },
-
   validationToken: {
     type: String,
     default: generateRandomToken
   },
-
   validated: {
     type: Boolean,
     default: true
-  }, 
+  },
+  favoriteRecipes: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Recipe'
+    }],
+    default: []
+  },
+  babies: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Baby'
+    }],
+    default: []
+  },
+  momWeight: {
+    type: Number
+  },
+  bellyDiameter: {
+    type: Number
+  },
 }, { timestamps: true })
+
+// Password hashing as a pre-hook for the save method
+userSchema.pre('save', next => {
+  if (user.isModified('password')) {
+    bcrypt.genSalt(SALT_WORK_FACTOR)
+      .then(salt => {
+        return bcrypt.hash(user.password, salt)
+          .then(hash => {
+            user.password = hash;
+            next();
+          });
+      })
+      .catch(error => next(error));
+  } else {
+    next();
+  }
+});
+
+// Comparison method between the password and the password's hash
+userSchema.methods.checkPassword = password => {
+  return bcrypt.compare(password, user.password);
+}
 
 const User = mongoose.model('User', userSchema);
 

@@ -5,29 +5,24 @@ const recipeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-
   image: {
     type: String,
     required: true,
     default: ''
   },
-
   recommended: {
     type: String,
     required: true,
     default: true,
   },
-
   ingredients: {
     type: String,
     required: true
   },
-
   difficulty: {
     type: String,
     required: true
   },
-
   description: {
     type: String,
     required: true

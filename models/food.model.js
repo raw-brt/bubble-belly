@@ -5,28 +5,20 @@ const foodSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-
   recommended: {
-    type: String,
-    required: true,
-    default: true,
+    type: Boolean,
+    default: true
   },
-
   image: {
     type: String,
-    required: true,
     default: ''
   },
-
   description: {
     type: String,
-    required: true,
     default: ''
   },
-
   quote : {
     type: String,
-    required: true,
     default: ''
   },
 }, { timestamps: true });

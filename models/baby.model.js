@@ -6,20 +6,15 @@ const babySchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-
   weeks: {
     type: Number,
     required: true,
   },
-
-  size: {
-    type: String,
-    required: true
+  babyWeight: {
+    type: Number
   },
-
-  comparison: {
-    type: String,
-    required: true
+  comparation: {
+    type: String
   },
 }, { timestamps: true });
 
