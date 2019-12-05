@@ -9,6 +9,7 @@ const logger       = require('morgan');
 
 require('./config/db.config');
 require('./config/hbs.config');
+require('./config/mailer.config');
 const session = require('./config/session.config');
 
 
