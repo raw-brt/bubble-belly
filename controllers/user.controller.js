@@ -12,15 +12,14 @@ module.exports.create = (req, res, next) => {
     email: req.body.email,
     username: req.body.username,
     password: req.body.password,
-    birthDate: req.body.birthDate,
-    lastPeriod: req.body.lastPeriod,
   })
 
   user.save()
     .then((user) => {
-      res.redirect('users/login')
+      res.redirect('/login')
     })
     .catch((error) => next(error));
+  }
 
 module.exports.validate = (req, res, next) => {
   User.findOne({validateToken: req.params.token})
@@ -41,7 +40,7 @@ module.exports.validate = (req, res, next) => {
 
 module.exports.login = (_, res) => {
   res.render('users/login')
-  }
+}
 
 module.exports.doLogin = (req, res, next) => {
     const { email, password } = req.body;
@@ -68,10 +67,15 @@ module.exports.doLogin = (req, res, next) => {
               } else {
                 req.session.user = user;
                 req.session.genericSuccess = 'Welcome!'
-                res.redirect('/');
+                res.redirect('/home');
               }
             })
         }
       })
   }
+
+
+module.exports.logout = (req, res) => {
+  req.session.destroy();
+  res.redirect('/login');
 };

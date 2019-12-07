@@ -40,7 +40,6 @@ const userSchema = new mongoose.Schema({
   },
   lastPeriod: {
     type: String,
-    required: true
   },
   validationToken: {
     type: String,
@@ -72,22 +71,22 @@ const userSchema = new mongoose.Schema({
   },
 }, { timestamps: true })
 
-// Password hashing as a pre-hook for the save method
-userSchema.pre('save', next => {
-  if (user.isModified('password')) {
-    bcrypt.genSalt(SALT_WORK_FACTOR)
-      .then(salt => {
-        return bcrypt.hash(user.password, salt)
-          .then(hash => {
-            user.password = hash;
-            next();
-          });
-      })
-      .catch(error => next(error));
-  } else {
-    next();
-  }
-});
+// // Password hashing as a pre-hook for the save method
+// userSchema.pre('save', next => {
+//   if (user.isModified('password')) {
+//     bcrypt.genSalt(SALT_WORK_FACTOR)
+//       .then(salt => {
+//         return bcrypt.hash(user.password, salt)
+//           .then(hash => {
+//             user.password = hash;
+//             next();
+//           });
+//       })
+//       .catch(error => next(error));
+//   } else {
+//     next();
+//   }
+// });
 
 // Comparison method between the password and the password's hash
 userSchema.methods.checkPassword = password => {
