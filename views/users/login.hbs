@@ -2,7 +2,7 @@
   <div class="form-group">
     <label for="email">email</label>
     <input name="email" type="email" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email"
-      placeholder="Enter name" value="{{ user.email }}">
+      placeholder="Enter email" value="{{ user.email }}">
     {{#if error.email}}
     <div class="invalid-feedback">
       {{error.email}}

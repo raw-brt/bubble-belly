@@ -6,6 +6,10 @@ module.exports.new = (_, res) => {
   res.render('users/new', { user: new User() })
 };
 
+module.exports.home = (_, res) => {
+  res.render('/home')
+}
+
 module.exports.create = (req, res, next) => {
   const user = new User({
     name: req.body.name,

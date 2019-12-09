@@ -91,8 +91,8 @@ userSchema.pre('save', function (next) {
 });
 
 // Comparison method between the password and the password's hash
-userSchema.methods.checkPassword = password => {
-  return bcrypt.compare(password, user.password);
+userSchema.methods.checkPassword = function (password) {
+  return bcrypt.compare(password, this.password);
 }
 
 const User = mongoose.model('User', userSchema);
