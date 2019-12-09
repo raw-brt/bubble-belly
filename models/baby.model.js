@@ -13,6 +13,9 @@ const babySchema = new mongoose.Schema({
   babyWeight: {
     type: Number
   },
+  babySize: {
+    type: Number,
+  },
   comparation: {
     type: String
   },

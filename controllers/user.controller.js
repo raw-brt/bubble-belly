@@ -2,13 +2,17 @@ const User = require('../models/user.model');
 const mongoose = require('mongoose');
 
 
+module.exports.start = (_, res) => {
+  res.render('users/start')
+};
+
 module.exports.new = (_, res) => {
   res.render('users/new', { user: new User() })
 };
 
 module.exports.home = (_, res) => {
   res.render('/home')
-}
+};
 
 module.exports.create = (req, res, next) => {
   const user = new User({
@@ -23,7 +27,7 @@ module.exports.create = (req, res, next) => {
       res.redirect('/login')
     })
     .catch((error) => next(error));
-  }
+  };
 
 module.exports.validate = (req, res, next) => {
   User.findOne({validateToken: req.params.token})
@@ -40,11 +44,11 @@ module.exports.validate = (req, res, next) => {
       }
     })
     .catch(next)
-}
+};
 
 module.exports.login = (_, res) => {
   res.render('users/login')
-}
+};
 
 module.exports.doLogin = (req, res, next) => {
     const { email, password } = req.body;
@@ -76,7 +80,7 @@ module.exports.doLogin = (req, res, next) => {
             })
         }
       })
-  }
+  };
 
 
 module.exports.logout = (req, res) => {

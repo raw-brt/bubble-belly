@@ -1,1 +1,34 @@
-<h1>This is the home page</h1>
+<div class="container">
+  <h1>Welcome {{user.username}}</h1>
+  <div class="row">
+
+    <form action="" method="">
+      <div class="form-group">
+        <label for="baby-size">Baby Size</label>
+        <input name="baby-size" type="text" readonly class="form-control-plaintext" {{#if error.babySize}}is-invalid{{/if}} id="baby-size" value="{{baby.babySize}}">
+      </div>
+    </form>
+
+    <form action="" method="">
+      <div class="form-group">
+        <label for="baby-weight">Baby Weight</label>
+        <input name="baby-weight" type="text" readonly class="form-control-plaintext" {{#if error.babyWeight}}is-invalid{{/if}} id="baby-size" value="{{baby.babyWeight}}">
+      </div>
+    </form>
+
+    <form action="" method="POST">
+      <div class="form-group">
+        <label for="belly-diameter">Belly Diameter</label>
+        <input name="belly-diameter" type="text" class="form-control" {{#if error.bellyDiameter}}is-invalid{{/if}} id="belly-diameter" value="{{user.bellyDiameter}}">
+      </div>
+    </form>
+
+    <form action="" method="POST">
+      <div class="form-group">
+        <label for="mom-weight">Mom Weight</label>
+        <input name="mom-weight" type="text" class="form-control" {{#if error.momWeight}}is-invalid{{/if}} id="mom-weight" value="{{user.momWeight}}">
+      </div>
+    </form>
+
+  </div>
+</div>

@@ -6,3 +6,16 @@ a {
   color: #00B7FF; }
 
 /*# sourceMappingURL=style.css.map */
+
+.bg {
+  /* The image used */
+  background-image: url("/public/images/start_mom.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
