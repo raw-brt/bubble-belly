@@ -1,6 +1,9 @@
-<form action="/user/new" method="POST">
-  <div class="form-group">
-    <label for="name">Name</label>
+<form action="/user/new" method="POST" class="d-flex flex-column align-self-center">
+  <div class="container d-flex flex-column align-self-center" id="start-image">
+    <img src="/images/logo.png" class="img-fluid">
+  </div>
+  <div class="form-group d-flex flex-column align-self-center">
+    <label for="name"><i class="fas fa-font"></i>Name</label>
     <input name="name" type="text" class="form-control {{#if error.name }}is-invalid{{/if}}" id="name"
       placeholder="Enter name" value="{{ user.name }}">
 
@@ -11,8 +14,8 @@
     {{/if}}
   </div>
 
-  <div class="form-group">
-    <label for="username">Username</label>
+  <div class="form-group d-flex flex-column align-self-center">
+    <label for="username"><i class="fas fa-user"></i>Username</label>
     <input name="username" type="text" class="form-control {{#if error.username }}is-invalid{{/if}}" id="username"
       placeholder="Enter username" value="{{ user.username }}">
   
@@ -23,8 +26,8 @@
     {{/if}}
   </div>
 
-  <div class="form-group">
-    <label for="email">Email</label>
+  <div class="form-group d-flex flex-column align-self-center">
+    <label for="email"><i class="fas fa-envelope"></i>Email</label>
     <input name="email" type="email" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email"
       placeholder="Enter email" value="{{ user.email }}">
   
@@ -35,8 +38,8 @@
     {{/if}}
   </div>
 
-    <div class="form-group">
-    <label for="password">Password</label>
+    <div class="form-group d-flex flex-column align-self-center">
+    <label for="password"><i class="fas fa-lock"></i>Password</label>
     <input name="password" type="password" class="form-control {{#if error.password }}is-invalid{{/if}}" id="password"
       placeholder="password" value="{{ user.password }}">
 
@@ -47,11 +50,12 @@
     {{/if}}
   </div>
 
-  <button type="submit" class="btn btn-primary">
-    Sign up
-  </button>
-
-  <button type="submit" href="localhost:3000/start" class="btn btn-secondary">
-    Back
-  </button>
+  <div class="row d-flex flex-column align-self-center">
+    <button type="submit" class="btn-main">
+      Sign up
+    </button>
+  </div>
+  <div class="row d-flex flex-column align-self-center">
+      <a href="http://localhost:3000/start" class="btn-secondary">Back</a>
+  </div>
 </form>

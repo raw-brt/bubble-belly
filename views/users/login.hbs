@@ -1,6 +1,9 @@
-<form action="/login" method="POST" class="mb-3" autocomplete="off">
-  <div class="form-group">
-    <label for="email">email</label>
+<form action="/login" method="POST" class="mb-3 d-flex flex-column align-self-center" autocomplete="off">  
+  <div class="container d-flex flex-column align-self-center" id="start-image">
+    <img src="/images/logo.png" class="img-fluid">
+  </div>
+  <div class="form-group d-flex flex-column align-self-center">
+    <label for="email"><i class="fas fa-envelope"></i>email</label>
     <input name="email" type="email" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email"
       placeholder="Enter email" value="{{ user.email }}">
     {{#if error.email}}
@@ -9,8 +12,8 @@
     </div>
     {{/if}}
   </div>
-  <div class="form-group">
-    <label for="password">password</label>
+  <div class="form-group d-flex flex-column align-self-center">
+    <label for="password"><i class="fas fa-lock"></i>password</label>
     <input name="password" type="password" class="form-control {{#if error.password }}is-invalid{{/if}}" id="password"
       placeholder="password" value="{{ user.password }}">
     {{#if error.password}}
@@ -19,9 +22,13 @@
     </div>
     {{/if}}
   </div>
-  <button type="submit" class="btn btn-primary">
-    Log in
-  </button>
+  <div class="row d-flex flex-column align-self-center">
+    <button type="submit" class="btn-main">
+      Log in
+    </button>
+  </div>
   {{!-- <a href="/auth/slack" class="btn btn-warning">Login With Slack</a> --}}
+  <div class="row d-flex flex-column align-self-center">
+      <a href="http://localhost:3000/user/new" class="btn-secondary">Signup</a>
+  </div>
 </form>
-<a href="/users/new">Sign up</a>
