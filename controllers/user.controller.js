@@ -12,11 +12,20 @@ module.exports.new = (_, res) => {
   res.render('users/new', { user: new User() })
 };
 
-module.exports.home = (req, res) => {
+module.exports.home = (req, res, next) => {
   User.findById(req.params.id)
     .then(user => {
-      res.render('/home/:userId', { user })
+      let foundUser = {
+        userId: user._id,
+        userBaby: user.babies,
+        momWeight: user.momWeight,
+        birthDate: user.birtDate,
+        events: user.events
+      }
+      res.render('/home/:userId', { user: foundUser })
     })
+    .catch(error => console.log("There was an error loading user/'s home: ", error))
+    next();
 };
 
 module.exports.create = (req, res, next) => {

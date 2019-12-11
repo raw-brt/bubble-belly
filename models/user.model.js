@@ -69,6 +69,13 @@ const userSchema = new mongoose.Schema({
   bellyDiameter: {
     type: Number
   },
+  events: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Event'
+    }],
+    default: []
+  },
 }, { timestamps: true })
 
 // Password hashing as a pre-hook for the save method
