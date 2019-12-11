@@ -24,7 +24,7 @@ module.exports.home = (req, res, next) => {
       }
       res.render('/home/:userId', { user: foundUser })
     })
-    .catch(error => console.log("There was an error loading user/'s home: ", error))
+    .catch(error => console.log(`There was an error loading user/'s ${userId} home: `, error))
     next();
 };
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controller')
+const babyController = require('../controllers/baby.controller')
 const authMiddleware = require('../middlewares/auth.middleware');
 
 // Start route
@@ -17,6 +18,6 @@ router.post('/user/login', authMiddleware.isNotAuthenticated, userController.doL
 router.post('/user/logout', userController.logout, authMiddleware.isNotAuthenticated);
 
 // Home
-router.get('/user/:userid', userController.home, authMiddleware.isAuthenticated);
+router.get('/user/:userid', userController.home, babyController.home, authMiddleware.isAuthenticated);
 
 module.exports = router;
