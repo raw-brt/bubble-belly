@@ -4,7 +4,8 @@ const userController = require('../controllers/user.controller')
 const authMiddleware = require('../middlewares/auth.middleware');
 
 // Start route
-router.get('/start', userController.start);
+router.get('/', (_, res) => res.redirect('/start'))
+router.get('/start', userController.start, authMiddleware.isNotAuthenticated);
 
 // Signup routes
 router.get('/user/new', userController.new);

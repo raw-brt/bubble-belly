@@ -1,4 +1,6 @@
 const User = require('../models/user.model');
+const Baby = require('../models/baby.model');
+const Event = require('../models/event.model');
 const mongoose = require('mongoose');
 
 
@@ -10,8 +12,11 @@ module.exports.new = (_, res) => {
   res.render('users/new', { user: new User() })
 };
 
-module.exports.home = (_, res) => {
-  res.render('/home')
+module.exports.home = (req, res) => {
+  User.findById(req.params.id)
+    .then(user => {
+      res.render('/home/:userId', { user })
+    })
 };
 
 module.exports.create = (req, res, next) => {
