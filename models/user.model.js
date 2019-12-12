@@ -63,12 +63,6 @@ const userSchema = new mongoose.Schema({
     }],
     default: []
   },
-  momWeight: {
-    type: Number
-  },
-  bellyDiameter: {
-    type: Number
-  },
   events: {
     type: [{
       type: mongoose.Schema.Types.ObjectId,
@@ -76,6 +70,12 @@ const userSchema = new mongoose.Schema({
     }],
     default: []
   },
+  momWeight: {
+    type: Number
+  },
+  bellyDiameter: {
+    type: Number
+  }
 }, { timestamps: true })
 
 // Password hashing as a pre-hook for the save method
