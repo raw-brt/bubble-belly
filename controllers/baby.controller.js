@@ -13,6 +13,7 @@ module.exports.home = (req, res, next) => {
     .then(foundBaby => {
       Baby.findById(foundBaby)
         .then(babyId => {
+          // Preguntar si esto está bien, ya que hago el mismo render en el controlador del usuario
           res.render('/home/:userId', { baby: babyId })
         })
     })

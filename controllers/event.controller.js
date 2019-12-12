@@ -11,6 +11,7 @@ module.exports.home = (req, res, next) => {
     .then(lastEvent => {
       Event.findById(lastEvent)
         .then(lastEventId => {
+          // Preguntar si esto está bien, ya que hago el mismo render en el controlador del usuario
           res.render('/home/:userId', { event: lastEventId })
         })
     })
