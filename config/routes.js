@@ -22,5 +22,6 @@ router.get('/user/:userid', authMiddleware.isAuthenticated, userController.home)
 
 // Profile
 router.get('/user/:userid/profile', authMiddleware.isAuthenticated, userController.profile);
+router.post('/user/:userid/profile', authMiddleware.isAuthenticated, userController.updateProfile);
 
 module.exports = router;

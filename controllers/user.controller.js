@@ -89,13 +89,22 @@ module.exports.doLogin = (req, res) => {
   };
 
 module.exports.profile = (req, res, next) => {
-console.log("entra")
   User.findById(req.params.userid)
   .then(user => {
     res.render('users/profile', { user: user });
   })
   .catch((error) =>  next(error))
 }
+
+// Preguntar por sacar un modal de confirmación
+module.exports.updateProfile = (req, res) => {
+  const { name, email, username, password, lastPeriod, weight, bellyDiameter } = req.body;
+  User.findByIdAndUpdate(req.params.userid, { $set: name, email, username, password, lastPeriod, weight, bellyDiameter })
+  .then(user => {
+    res.render('user/profile', { user: user })
+  })
+  .catch(error => console.log(`Something went wrong when updating ${user.name} profile`, error))
+};
 
 module.exports.logout = (req, res) => {
   req.session.destroy();
