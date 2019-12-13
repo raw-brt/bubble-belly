@@ -1,41 +1,54 @@
-<div class="container">
-  <h1>Welcome {{user.name}}</h1>
-  <div class="row">
+{{!-- Navigation bar --}}
 
-    <form action="" method="">
-      <div class="form-group">
-        <label for="baby-size">Baby Size</label>
-        <input name="baby-size" type="text" readonly class="form-control-plaintext" {{#if error.babySize}}is-invalid{{/if}} id="baby-size" value="{{baby.comparison}}">
+<nav class="navbar d-flex flex-row justify-content-around fixed-bottom navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-nav d-flex flex-row justify-content-around">
+      <div class="px-4"><a class="nav-item nav-link active" href="#"><i class="fas fa-home"></i><span class="sr-only">(current)</span></a></div>
+      <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-utensils"></i></a></div>
+      <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-calendar-day"></i></a></div>
+      <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-user"></i></a></div>
+    </div>
+  </div>
+</nav>
+
+{{!-- Main section --}}
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container container-fluid">
+    <div class="row">
+      <p class="ml-3 mb-4" id="jumbotron-welcome">Welcome, {{user.name}}</p>
+    </div>
+    <div class="row">
+      <div class="col" id="jumbotron-first-column">
+        <p class="text-left my-4"><i class="fas fa-tape"></i>Baby size</p>
+        <p class="text-left my-4"><i class="fas fa-baby"></i>Baby weight</p>
       </div>
-    </form>
-
-    <form action="" method="">
-      <div class="form-group">
-        <label for="baby-weight">Baby Weight</label>
-        <input name="baby-weight" type="text" readonly class="form-control-plaintext" {{#if error.babyWeight}}is-invalid{{/if}} id="baby-size" value="{{baby.babyWeight}}">
+      <div class="col" id="jumbotron-second-column">
+        <p class="text-left my-4"><i class="fas fa-circle-notch"></i>{{user.bellyDiameter}}</p>
+        <p class="text-left my-4"><i class="fas fa-weight"></i>{{user.weight}}</p>
       </div>
-    </form>
-
-    <form action="" method="">
-      <div class="form-group">
-        <label for="belly-diameter">Belly Diameter</label>
-        <input name="belly-diameter" type="text" class="form-control" {{#if error.bellyDiameter}}is-invalid{{/if}} id="belly-diameter" value="{{user.bellyDiameter}}">
-      </div>
-    </form>
-
-    <form action="" method="">
-      <div class="form-group">
-        <label for="mom-weight">Your weight</label>
-        <input name="mom-weight" type="text" class="form-control" {{#if error.weight}}is-invalid{{/if}} id="weight" value="{{user.weight}}">
-      </div>
-    </form>
-
-    <form action="" method="">
-      <div class="form-group">
-        <label for="baby-age">Baby age</label>
-        <input name="baby-age" type="text" class="form-control" {{#if error.weight}}is-invalid{{/if}} id="weight" value="{{user.babyAge}}">
-      </div>
-    </form>
-
+    </div>
   </div>
 </div>
+
+<div class="container" id="recommended-recipes">
+  <h4>Recommended recipes</h4>
+  <div class="row">
+    <div class="card-container col-sm-6 my-2">
+      <div class="card">
+        <img src="https://www.simplyrecipes.com/wp-content/uploads/2014/05/guacamole-horiz-a-1600.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Guacamole</h5>
+          </div>
+      </div>
+    </div>
+    <div class="card-container col-sm-6 py-1">
+      <div class="card">
+        <img src="https://www.simplyrecipes.com/wp-content/uploads/2014/05/guacamole-horiz-a-1600.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Guacamole</h5>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+

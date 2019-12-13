@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controller');
-const babyController = require('../controllers/baby.controller');
 const eventController = require('../controllers/event.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
 
 // Start route
 router.get('/', (_, res) => res.redirect('/start'))
-router.get('/start', userController.start, authMiddleware.isNotAuthenticated);
+router.get('/start', authMiddleware.isNotAuthenticated, userController.start);
 
 // Signup routes
 router.get('/user/new', userController.new);

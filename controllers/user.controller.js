@@ -57,7 +57,7 @@ module.exports.login = (_, res) => {
   res.render('users/login', )
 };
 
-module.exports.doLogin = (req, res, next) => {
+module.exports.doLogin = (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.render('users/login', { user: req.body })
@@ -65,7 +65,6 @@ module.exports.doLogin = (req, res, next) => {
 
     User.findOne({ email: email, validated: true })
       .then(user => {
-
         if (!user) {
           res.render('users/login', {
             user: req.body,
