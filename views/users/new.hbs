@@ -50,6 +50,42 @@
     {{/if}}
   </div>
 
+  <div class="form-group d-flex flex-column align-self-center">
+    <label for="period"><i class="fas fa-tint-slash"></i>When did you have the last period?</label>
+    <input name="period" type="date" class="form-control {{#if error.lastPeriod }}is-invalid{{/if}}" id="period"
+      placeholder="Last period date value">
+  
+    {{#if error.period}}
+    <div class="invalid-feedback">
+      {{error.period.message}}
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="form-group d-flex flex-column align-self-center">
+    <label for="weight"><i class="fas fa-weight"></i>Weight</label>
+    <input name="weight" type="number" class="form-control {{#if error.weight }}is-invalid{{/if}}" id="weight"
+      placeholder="Weight (Kg)">
+  
+    {{#if error.weight}}
+    <div class="invalid-feedback">
+      {{error.weight.message}}
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="form-group d-flex flex-column align-self-center">
+    <label for="diameter"><i class="fas fa-circle-notch"></i>Which is the diameter of your belly?</label>
+    <input name="diameter" type="number" class="form-control {{#if error.bellyDiameter }}is-invalid{{/if}}" id="diameter"
+      placeholder="Diameter (cm)">
+  
+    {{#if error.bellyDiameter}}
+    <div class="invalid-feedback">
+      {{error.bellyDiameter.message}}
+    </div>
+    {{/if}}
+  </div>
+
   <div class="row d-flex flex-column align-self-center">
     <button type="submit" class="btn-main">
       Sign up

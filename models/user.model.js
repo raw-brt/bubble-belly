@@ -36,10 +36,19 @@ const userSchema = new mongoose.Schema({
     minlength: [8, 'Password needs at least 8 characters']
   },
   birthDate: {
-    type: String,
+    type: String
   },
   lastPeriod: {
-    type: String,
+    type: Date
+  },
+  weight: {
+    type: Number
+  },
+  bellyDiameter: {
+    type: Number
+  },
+  babyAge: {
+    type: Date,
   },
   validationToken: {
     type: String,
@@ -50,6 +59,13 @@ const userSchema = new mongoose.Schema({
     default: true
   },
   favoriteRecipes: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Recipe'
+    }],
+    default: []
+  },
+  favoriteFood: {
     type: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Recipe'
@@ -69,12 +85,6 @@ const userSchema = new mongoose.Schema({
       ref: 'Event'
     }],
     default: []
-  },
-  momWeight: {
-    type: Number
-  },
-  bellyDiameter: {
-    type: Number
   }
 }, { timestamps: true })
 
@@ -96,6 +106,16 @@ userSchema.pre('save', function (next) {
     next();
   }
 });
+
+userSchema.pre('save', function () {
+  const user = this;
+  const lastPeriodDate = this.lastPeriod;
+  const actualDate = Date.now();
+
+  const ageInWeeks = actualDate - lastPeriodDate / (1000 * 3600 * 24 * 7);
+
+  return this.babyAge = ageInWeeks;
+})
 
 // Comparison method between the password and the password's hash
 userSchema.methods.checkPassword = function (password) {

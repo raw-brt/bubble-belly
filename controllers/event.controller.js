@@ -12,7 +12,7 @@ module.exports.home = (req, res, next) => {
       Event.findById(lastEvent)
         .then(lastEventId => {
           // Preguntar si esto está bien, ya que hago el mismo render en el controlador del usuario
-          res.render('/home/:userId', { event: lastEventId })
+          res.render('users/home', { event: lastEventId })
         })
     })
     .catch(error => console.log(`There was an error loading user/'s ${userId} home: `, error))

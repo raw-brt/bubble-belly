@@ -1,11 +1,11 @@
 <div class="container">
-  <h1>Welcome {{user.username}}</h1>
+  <h1>Welcome {{user.name}}</h1>
   <div class="row">
 
     <form action="" method="">
       <div class="form-group">
         <label for="baby-size">Baby Size</label>
-        <input name="baby-size" type="text" readonly class="form-control-plaintext" {{#if error.babySize}}is-invalid{{/if}} id="baby-size" value="{{baby.babySize}}">
+        <input name="baby-size" type="text" readonly class="form-control-plaintext" {{#if error.babySize}}is-invalid{{/if}} id="baby-size" value="{{baby.comparison}}">
       </div>
     </form>
 
@@ -16,17 +16,24 @@
       </div>
     </form>
 
-    <form action="" method="POST">
+    <form action="" method="">
       <div class="form-group">
         <label for="belly-diameter">Belly Diameter</label>
         <input name="belly-diameter" type="text" class="form-control" {{#if error.bellyDiameter}}is-invalid{{/if}} id="belly-diameter" value="{{user.bellyDiameter}}">
       </div>
     </form>
 
-    <form action="" method="POST">
+    <form action="" method="">
       <div class="form-group">
-        <label for="mom-weight">Mom Weight</label>
-        <input name="mom-weight" type="text" class="form-control" {{#if error.momWeight}}is-invalid{{/if}} id="mom-weight" value="{{user.momWeight}}">
+        <label for="mom-weight">Your weight</label>
+        <input name="mom-weight" type="text" class="form-control" {{#if error.weight}}is-invalid{{/if}} id="weight" value="{{user.weight}}">
+      </div>
+    </form>
+
+    <form action="" method="">
+      <div class="form-group">
+        <label for="baby-age">Baby age</label>
+        <input name="baby-age" type="text" class="form-control" {{#if error.weight}}is-invalid{{/if}} id="weight" value="{{user.babyAge}}">
       </div>
     </form>
 

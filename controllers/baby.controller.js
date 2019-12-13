@@ -14,7 +14,7 @@ module.exports.home = (req, res, next) => {
       Baby.findById(foundBaby)
         .then(babyId => {
           // Preguntar si esto está bien, ya que hago el mismo render en el controlador del usuario
-          res.render('/home/:userId', { baby: babyId })
+          res.render('users/home', { baby: babyId })
         })
     })
     .catch(error => console.log(`There was an error loading user/'s ${userId} home: `, error))

@@ -11,19 +11,11 @@ module.exports.new = (_, res) => {
 };
 
 module.exports.home = (req, res, next) => {
-  User.findById(req.params.id)
+  User.findById(req.params.userid)
     .then(user => {
-      let foundUser = {
-        userId: user._id,
-        userBaby: user.babies,
-        momWeight: user.momWeight,
-        birthDate: user.birtDate,
-        events: user.events
-      }
-      res.render('/home/:userId', { user: foundUser })
+      res.render('users/home', { user: user })
     })
-    .catch(error => console.log(`There was an error loading user/'s ${userId} home: `, error))
-    next();
+    .catch((error) =>  next(error))
 };
 
 module.exports.create = (req, res, next) => {
@@ -32,6 +24,9 @@ module.exports.create = (req, res, next) => {
     email: req.body.email,
     username: req.body.username,
     password: req.body.password,
+    lastPeriod: req.body.period.toString(),
+    weight: req.body.weight,
+    bellyDiameter: req.body.diameter
   })
 
   user.save()
@@ -59,18 +54,18 @@ module.exports.validate = (req, res, next) => {
 };
 
 module.exports.login = (_, res) => {
-  res.render('users/login')
+  res.render('users/login', )
 };
 
 module.exports.doLogin = (req, res, next) => {
     const { email, password } = req.body;
-
     if (!email || !password) {
       return res.render('users/login', { user: req.body })
     }
 
     User.findOne({ email: email, validated: true })
       .then(user => {
+
         if (!user) {
           res.render('users/login', {
             user: req.body,
@@ -87,7 +82,7 @@ module.exports.doLogin = (req, res, next) => {
               } else {
                 req.session.user = user;
                 req.session.genericSuccess = 'Welcome!'
-                res.redirect('/home');
+                res.redirect(`user/${req.session.user.id}`);
               }
             })
         }

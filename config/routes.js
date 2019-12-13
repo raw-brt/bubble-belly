@@ -14,11 +14,11 @@ router.get('/user/new', userController.new);
 router.post('/user/new', userController.create);
 
 // Login routes
-router.get('/user/login', userController.login, authMiddleware.isNotAuthenticated);
-router.post('/user/login', authMiddleware.isNotAuthenticated, userController.doLogin);
-router.post('/user/logout', userController.logout, authMiddleware.isNotAuthenticated);
+router.get('/login', authMiddleware.isNotAuthenticated, userController.login);
+router.post('/login', authMiddleware.isNotAuthenticated, userController.doLogin);
+router.post('/logout', authMiddleware.isAuthenticated, userController.logout);
 
 // Home
-router.get('/user/:userid', userController.home, babyController.home, eventController.home, authMiddleware.isAuthenticated);
+router.get('/user/:userid', authMiddleware.isAuthenticated, userController.home);
 
 module.exports = router;
