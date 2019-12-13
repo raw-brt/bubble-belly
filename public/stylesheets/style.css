@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: 300;
@@ -104,18 +103,24 @@ label {
 #jumbotron-welcome {
   color: #fff;
   font-weight: 600;
-  font-size: 1.5em;
+  font-size: 1.7em;
 }
 
 #jumbotron-first-column p {
   color: #fff;
+  font-size: 1.1em;
 }
 
 #jumbotron-second-column p {
   color: #fff;
+  font-size: 1.1em;
 }
 
 .fa-tape , .fa-baby , .fa-circle-notch, .fa-weight  {
+  color: #fff;
+}
+
+hr {
   color: #fff;
 }
 

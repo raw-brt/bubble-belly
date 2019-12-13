@@ -20,4 +20,7 @@ router.post('/logout', authMiddleware.isAuthenticated, userController.logout);
 // Home
 router.get('/user/:userid', authMiddleware.isAuthenticated, userController.home);
 
+// Profile
+router.get('/user/:userid/profile', authMiddleware.isAuthenticated, userController.profile);
+
 module.exports = router;

@@ -88,7 +88,16 @@ module.exports.doLogin = (req, res) => {
       })
   };
 
+module.exports.profile = (req, res, next) => {
+console.log("entra")
+  User.findById(req.params.userid)
+  .then(user => {
+    res.render('users/profile', { user: user });
+  })
+  .catch((error) =>  next(error))
+}
+
 module.exports.logout = (req, res) => {
   req.session.destroy();
-  res.redirect('/login');
+  res.redirect('/start');
 };

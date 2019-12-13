@@ -1,11 +1,11 @@
 {{!-- Navigation bar --}}
 
-<nav class="navbar d-flex flex-row justify-content-around fixed-bottom navbar-expand-lg navbar-light bg-light">
+<nav class="navbar d-flex flex-row justify-content-around fixed-bottom navbar-expand-lg navbar-light bg-light mt-2">
     <div class="navbar-nav d-flex flex-row justify-content-around">
-      <div class="px-4"><a class="nav-item nav-link active" href="#"><i class="fas fa-home"></i><span class="sr-only">(current)</span></a></div>
+      <div class="px-4"><a class="nav-item nav-link active" href="http://localhost:3000/home/{{user._id}}"><i class="fas fa-home"></i><span class="sr-only">(current)</span></a></div>
       <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-utensils"></i></a></div>
       <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-calendar-day"></i></a></div>
-      <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-user"></i></a></div>
+      <div class="px-4"><a class="nav-item nav-link" href="http://localhost:3000/user/{{user._id}}/profile"><i class="fas fa-user"></i></a></div>
     </div>
   </div>
 </nav>
@@ -17,6 +17,7 @@
     <div class="row">
       <p class="ml-3 mb-4" id="jumbotron-welcome">Welcome, {{user.name}}</p>
     </div>
+    <hr class="my-1 mx-2">
     <div class="row">
       <div class="col" id="jumbotron-first-column">
         <p class="text-left my-4"><i class="fas fa-tape"></i>Baby size</p>
@@ -30,7 +31,7 @@
   </div>
 </div>
 
-<div class="container" id="recommended-recipes">
+<div class="container mb-2" id="recommended-recipes">
   <h4>Recommended recipes</h4>
   <div class="row">
     <div class="card-container col-sm-6 my-2">
