@@ -277,4 +277,8 @@ hr {
   font-weight: 600;
 }
 
+#recommended-recipes-row {
+margin-bottom: 6em;
+}
+
 /* Cards */

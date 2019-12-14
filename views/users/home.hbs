@@ -20,12 +20,13 @@
     <hr class="my-1 mx-2">
     <div class="row">
       <div class="col" id="jumbotron-first-column">
-        <p class="text-left my-4"><i class="fas fa-tape"></i>Baby size</p>
-        <p class="text-left my-4"><i class="fas fa-baby"></i>Baby weight</p>
+        <p class="text-left my-4"><i class="fas fa-tape"></i>{{babySize}} cm.</p>
+        <p class="text-left my-4"><i class="fas fa-baby"></i>{{babyWeight}} gr.</p>
       </div>
       <div class="col" id="jumbotron-second-column">
-        <p class="text-left my-4"><i class="fas fa-circle-notch"></i>{{user.bellyDiameter}}</p>
-        <p class="text-left my-4"><i class="fas fa-weight"></i>{{user.weight}}</p>
+        <p class="text-left my-4"><i class="fas fa-circle-notch"></i>{{user.bellyDiameter}} cm.</p>
+        <p class="text-left my-4"><i class="fas fa-weight"></i>{{user.weight}} gr.</p>
+        <p class="text-left my-4"><i class="fas fa-baby"></i>{{user.babyAge}} weeks</p>
       </div>
     </div>
   </div>
@@ -33,9 +34,9 @@
 
 <span class="icon-{{size}}"></span>
 
-<div class="container mb-2" id="recommended-recipes">
+<div class="container" id="recommended-recipes">
   <h4>Recommended recipes</h4>
-  <div class="row">
+  <div class="row" id="recommended-recipes-row">
     <div class="card-container col-sm-6 my-2">
       <div class="card">
         <img src="https://www.simplyrecipes.com/wp-content/uploads/2014/05/guacamole-horiz-a-1600.jpg" class="card-img-top" alt="...">

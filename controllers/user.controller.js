@@ -1,9 +1,9 @@
 const User = require('../models/user.model');
 const babyLogic = require('../helpers/baby.logic');
 const mongoose = require('mongoose');
-
+const babyInfo = require('../data/info');
 // Import data files
-require('../data/info');
+
 
 module.exports.start = (_, res) => {
   res.render('users/start')
@@ -14,12 +14,19 @@ module.exports.new = (_, res) => {
 };
 
 module.exports.home = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.userid)
+  console.log(req.session.user.lastPeriod)
+  let ageInWeeks = babyLogic.updateAge(req.session.user.lastPeriod);
+
+  User.findByIdAndUpdate(req.params.userid, { babyAge: ageInWeeks }, { new: true })
     .then(user => {
-      updateAge(user.lastPeriod);
-      res.render('users/home', { user: user, size: sizes[user.babyAge - 1] })
+      res.render('users/home', { 
+        user: user, 
+        size: babyInfo.sizes[user.babyAge - 1],
+        babyWeight: babyInfo.babyWeights[user.babyAge - 1],
+        babySize: babyInfo.babySizes[user.babyAge - 1]
+      })
     })
-    .catch((error) =>  next(error))
+    .catch((error) => next(error))
 };
 
 module.exports.create = (req, res, next) => {
@@ -39,10 +46,10 @@ module.exports.create = (req, res, next) => {
       res.redirect('/login')
     })
     .catch((error) => next(error));
-  };
+};
 
 module.exports.validate = (req, res, next) => {
-  User.findOne({validateToken: req.params.token})
+  User.findOne({ validateToken: req.params.token })
     .then(user => {
       if (user) {
         user.validated = true;
@@ -59,46 +66,46 @@ module.exports.validate = (req, res, next) => {
 };
 
 module.exports.login = (_, res) => {
-  res.render('users/login', )
+  res.render('users/login')
 };
 
 module.exports.doLogin = (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.render('users/login', { user: req.body })
-    }
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.render('users/login', { user: req.body })
+  }
 
-    User.findOne({ email: email, validated: true })
-      .then(user => {
-        if (!user) {
-          res.render('users/login', {
-            user: req.body,
-            error: { password: 'invalid password/email' }
+  User.findOne({ email: email, validated: true })
+    .then(user => {
+      if (!user) {
+        res.render('users/login', {
+          user: req.body,
+          error: { password: 'invalid password/email' }
+        })
+      } else {
+        return user.checkPassword(password)
+          .then(match => {
+            if (!match) {
+              res.render('users/login', {
+                user: req.body,
+                error: { password: 'invalid password/email' }
+              })
+            } else {
+              req.session.user = user;
+              req.session.genericSuccess = 'Welcome!'
+              res.redirect(`user/${req.session.user.id}`);
+            }
           })
-        } else {
-          return user.checkPassword(password)
-            .then(match => {
-              if (!match) {
-                res.render('users/login', {
-                  user: req.body,
-                  error: { password: 'invalid password/email' }
-                })
-              } else {
-                req.session.user = user;
-                req.session.genericSuccess = 'Welcome!'
-                res.redirect(`user/${req.session.user.id}`);
-              }
-            })
-        }
-      })
-  };
+      }
+    })
+};
 
 module.exports.profile = (req, res, next) => {
   User.findById(req.params.userid)
-  .then(user => {
-    res.render('users/profile', { user: user });
-  })
-  .catch((error) =>  next(error))
+    .then(user => {
+      res.render('users/profile', { user: user });
+    })
+    .catch((error) => next(error))
 }
 
 // Preguntar por sacar un modal de confirmación
@@ -107,10 +114,10 @@ module.exports.profile = (req, res, next) => {
 module.exports.updateProfile = (req, res) => {
   const { name, email, username, password, lastPeriod, weight, bellyDiameter } = req.body;
   User.findByIdAndUpdate(req.params.userid, { $set: name, email, username, password, lastPeriod, weight, bellyDiameter })
-  .then(user => {
-    res.render('user/profile', { user: user })
-  })
-  .catch(error => console.log(`Something went wrong when updating ${user.name} profile`, error))
+    .then(user => {
+      res.render('user/profile', { user: user })
+    })
+    .catch(error => console.log(`Something went wrong when updating ${user.name} profile`, error))
 };
 
 module.exports.logout = (req, res) => {
