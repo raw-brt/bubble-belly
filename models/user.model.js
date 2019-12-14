@@ -44,11 +44,20 @@ const userSchema = new mongoose.Schema({
   weight: {
     type: Number
   },
+  babyWeight: {
+    type: Number
+  },
+  babySize: {
+    type: Number
+  },
+  babyComparison: {
+    type: String
+  },
   bellyDiameter: {
     type: Number
   },
   babyAge: {
-    type: Date,
+    type: Number,
   },
   validationToken: {
     type: String,
@@ -101,21 +110,28 @@ userSchema.pre('save', function (next) {
             next();
           });
       })
+      .then(() => {
+        const daysFromLastPeriod = Math.round((user.lastPeriod).setDate(user.lastPeriod.getDate()) / (1000 * 60 * 60 * 24));
+        const actualDate = Math.round((new Date()).setDate(new Date().getDate()) / (1000 * 60 * 60 * 24));
+        const ageInWeeks = Math.round((actualDate - daysFromLastPeriod) / 7);
+
+        user.babyAge = ageInWeeks;
+      })
       .catch(error => next(error));
   } else {
     next();
   }
 });
 
-userSchema.pre('save', function () {
-  const user = this;
-  const lastPeriodDate = this.lastPeriod;
-  const actualDate = Date.now();
+// userSchema.pre('save', function () {
 
-  const ageInWeeks = actualDate - lastPeriodDate / (1000 * 3600 * 24 * 7);
+//   const daysFromLastPeriod = Math.round((user.lastPeriod).setDate(user.lastPeriod.getDate()) / (1000 * 60 * 60 * 24));
+//   const actualDate = Math.round((new Date()).setDate(new Date().getDate()) / (1000 * 60 * 60 * 24));
 
-  return this.babyAge = ageInWeeks;
-})
+//   const ageInWeeks = actualDate - daysFromLastPeriod / 7;
+
+//   return user.babyAge = ageInWeeks;
+// })
 
 // Comparison method between the password and the password's hash
 userSchema.methods.checkPassword = function (password) {

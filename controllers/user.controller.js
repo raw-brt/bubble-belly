@@ -1,6 +1,9 @@
 const User = require('../models/user.model');
+const babyLogic = require('../helpers/baby.logic');
 const mongoose = require('mongoose');
 
+// Import data files
+require('../data/info');
 
 module.exports.start = (_, res) => {
   res.render('users/start')
@@ -11,20 +14,22 @@ module.exports.new = (_, res) => {
 };
 
 module.exports.home = (req, res, next) => {
-  User.findById(req.params.userid)
+  User.findByIdAndUpdate(req.params.userid)
     .then(user => {
-      res.render('users/home', { user: user })
+      updateAge(user.lastPeriod);
+      res.render('users/home', { user: user, size: sizes[user.babyAge - 1] })
     })
     .catch((error) =>  next(error))
 };
 
 module.exports.create = (req, res, next) => {
+  console.log(req.body.period)
   const user = new User({
     name: req.body.name,
     email: req.body.email,
     username: req.body.username,
     password: req.body.password,
-    lastPeriod: req.body.period.toString(),
+    lastPeriod: req.body.period,
     weight: req.body.weight,
     bellyDiameter: req.body.diameter
   })
@@ -97,6 +102,8 @@ module.exports.profile = (req, res, next) => {
 }
 
 // Preguntar por sacar un modal de confirmación
+// No me encuentra la ruta de los partials al usarlos
+// Cómo hacer el buscador
 module.exports.updateProfile = (req, res) => {
   const { name, email, username, password, lastPeriod, weight, bellyDiameter } = req.body;
   User.findByIdAndUpdate(req.params.userid, { $set: name, email, username, password, lastPeriod, weight, bellyDiameter })
