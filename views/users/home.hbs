@@ -3,7 +3,7 @@
 <nav class="navbar d-flex flex-row justify-content-around fixed-bottom navbar-expand-lg navbar-light bg-light mt-2">
     <div class="navbar-nav d-flex flex-row justify-content-around">
       <div class="px-4"><a class="nav-item nav-link active" href="http://localhost:3000/home/{{user._id}}"><i class="fas fa-home"></i><span class="sr-only">(current)</span></a></div>
-      <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-utensils"></i></a></div>
+      <div class="px-4"><a class="nav-item nav-link" href="http://localhost:3000/user/{{user._id}}/food"><i class="fas fa-utensils"></i></a></div>
       <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-calendar-day"></i></a></div>
       <div class="px-4"><a class="nav-item nav-link" href="http://localhost:3000/user/{{user._id}}/profile"><i class="fas fa-user"></i></a></div>
     </div>
@@ -32,7 +32,18 @@
   </div>
 </div>
 
-<span class="icon-{{size}}"></span>
+<div class="container" id="babysize-home">
+    <h4>Baby size / Events</h4>
+    <div class="row">
+      <div class="col-4 white-card d-flex flex-column justify-content-center align-items-center">
+          <i class="icon-{{size}} ico-font"></i>
+          <p>{{user.babyComparison}}</p>
+      </div>
+      <div class="col-6 white-card">
+        <p>This is a window for the events</p>
+      </div>
+    </div>
+  </div>
 
 <div class="container" id="recommended-recipes">
   <h4>Recommended recipes</h4>

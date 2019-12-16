@@ -24,4 +24,8 @@ router.get('/user/:userid', authMiddleware.isAuthenticated, userController.home)
 router.get('/user/:userid/profile', authMiddleware.isAuthenticated, userController.profile);
 router.post('/user/:userid/profile', authMiddleware.isAuthenticated, userController.updateProfile);
 
+// Food search
+router.get('/user/:userid/food', authMiddleware.isAuthenticated, userController.food);
+router.get('/user/:userid/food', authMiddleware.isAuthenticated, userController.getFood);
+
 module.exports = router;

@@ -120,6 +120,30 @@ module.exports.updateProfile = (req, res) => {
     .catch(error => console.log(`Something went wrong when updating ${user.name} profile`, error))
 };
 
+module.exports.food = (req, res) => {
+  res.render('food/foods');
+}
+
+module.exports.getFood = (req, res) => {
+  const params = req.query.params;
+  const food = (params) => {
+    if (/\s/.test(params)) {
+      params.replace('', '&20')
+      return params;
+    } else {
+      return params;
+    }
+  };
+
+  const foodQuery = food(params);
+  
+  const edamamCall = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&ingr=${foodQuery}&app_id=${FOOD_ID}&app_key=${FOOD_KEY}`
+
+  fetch(edamamCall)
+    .then(food => res.render('food/foods', { food: food }))
+    .catch(error);
+};
+
 module.exports.logout = (req, res) => {
   req.session.destroy();
   res.redirect('/start');
