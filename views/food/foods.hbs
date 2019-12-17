@@ -22,11 +22,11 @@
 
 {{!-- Search input --}}
 
-<form action="/user/{{user._id}}/food" method="GET" class="mb-3 d-flex flex-column align-self-center" autocomplete="off">  
+<form action="/user/food/search" method="GET" class="mb-3 d-flex flex-column align-self-center" autocomplete="off">  
   <div class="form-group d-flex flex-column align-self-center">
     <label for="email"><i class="fas fa-search"></i>Search food</label>
-    <input name="email" type="email" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email"
-      placeholder="Enter email" value="{{ user.email }}">
+    <input name="foodSearch" type="text" class="form-control {{#if error.email }}is-invalid{{/if}}" id="foodSearch"
+      placeholder="Enter food to search" value="">
     {{#if error.email}}
     <div class="invalid-feedback">
       {{error.email}}
@@ -40,3 +40,5 @@
     </button>
   </div>
 </form>
+
+<h2>What you searched for is: {{this.[0].food.label}}</h2>

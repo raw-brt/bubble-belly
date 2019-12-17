@@ -1,7 +1,11 @@
+require('dotenv').config()
+
 const User = require('../models/user.model');
 const babyLogic = require('../helpers/baby.logic');
 const mongoose = require('mongoose');
 const babyInfo = require('../data/info');
+const fetch = require("node-fetch");
+const axios = require("axios")
 // Import data files
 
 
@@ -30,7 +34,6 @@ module.exports.home = (req, res, next) => {
 };
 
 module.exports.create = (req, res, next) => {
-  console.log(req.body.period)
   const user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -124,24 +127,18 @@ module.exports.food = (req, res) => {
   res.render('food/foods');
 }
 
-module.exports.getFood = (req, res) => {
-  const params = req.query.params;
-  const food = (params) => {
-    if (/\s/.test(params)) {
-      params.replace('', '&20')
-      return params;
-    } else {
-      return params;
-    }
-  };
+module.exports.getFood = async (req, res) => {
+ 
+  const foodQuery = req.query.foodSearch;
 
-  const foodQuery = food(params);
-  
-  const edamamCall = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&ingr=${foodQuery}&app_id=${FOOD_ID}&app_key=${FOOD_KEY}`
+  let edamamCall = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&ingr=${foodQuery}&app_id=${FOOD_ID}&app_key=${FOOD_KEY}`
 
-  fetch(edamamCall)
-    .then(food => res.render('food/foods', { food: food }))
-    .catch(error);
+  try {
+    const response = (await axios.get(edamamCall)).data;
+    res.render('food/foods', response.hints)
+  } catch (axiosErr) {
+      console.log(axiosErr)
+  }
 };
 
 module.exports.logout = (req, res) => {
