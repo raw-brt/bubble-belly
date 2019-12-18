@@ -3,7 +3,7 @@
 <nav class="navbar d-flex flex-row justify-content-around fixed-bottom navbar-expand-lg navbar-light bg-light mt-2">
     <div class="navbar-nav d-flex flex-row justify-content-around">
       <div class="px-4"><a class="nav-item nav-link active" href="http://localhost:3000/home/{{user._id}}"><i class="fas fa-home"></i><span class="sr-only">(current)</span></a></div>
-      <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-utensils"></i></a></div>
+      <div class="px-4"><a class="nav-item nav-link" href="http://localhost:3000/user/{{user._id}}/food"><i class="fas fa-utensils"></i></a></div>
       <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-calendar-day"></i></a></div>
       <div class="px-4"><a class="nav-item nav-link" href="http://localhost:3000/user/{{user._id}}/profile"><i class="fas fa-user"></i></a></div>
     </div>
@@ -44,21 +44,24 @@
 
 
 {{#if recommended}}
-  <p class="h3">What you searched for is: {{response.[0].food.label}} <span class="badge badge pill badge-success">Recommended</span></p>
+  <p class="h3">What you searched for is: {{foodResponse.[0].food.label}} <span class="badge badge pill badge-success">Recommended</span></p>
 {{else}}
-  <p class="h3">What you searched for is: {{response.[0].food.label}} <span class="badge badge pill badge-warning">Warning</span></p>
+  <p class="h3">What you searched for is: {{foodResponse.[0].food.label}} <span class="badge badge pill badge-warning">Warning</span></p>
 {{/if}}
 
-<div class="container" id="food-recipes">
+<p class="h4">{{recipeResponse.[0].recipe.label}}</p>
+<img src="{{recipeResponse.[0].recipe.image}}" class="img-thumbnail">
+
+{{!-- <div class="container" id="food-recipes">
   {{#each recipeResponse}}
     <div class="row" id="food-recipes-row">
         <div class="card-container col-sm-6 my-2">
           <div class="card">
-            <img src="{{recipeResponse.[0].image}}" class="card-img-top" alt="...">
+            <img src="{{recipeResponse.[0].recipe.image}}" class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title">{{recipeResponse.[0].label}}</h5>
+                <h5 class="card-title">{{recipeResponse.[0].recipe.label}}</h5>
               </div>
           </div>
         </div>
   {{/each}}
-</div>
+</div> --}}

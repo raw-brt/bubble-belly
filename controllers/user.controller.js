@@ -4,7 +4,6 @@ const User = require('../models/user.model');
 const babyLogic = require('../helpers/baby.logic');
 const mongoose = require('mongoose');
 const babyInfo = require('../data/info');
-const fetch = require("node-fetch");
 const axios = require("axios")
 // Import data files
 
@@ -18,7 +17,6 @@ module.exports.new = (_, res) => {
 };
 
 module.exports.home = (req, res, next) => {
-  console.log(req.session.user.lastPeriod)
   let ageInWeeks = babyLogic.updateAge(req.session.user.lastPeriod);
 
   User.findByIdAndUpdate(req.params.userid, { babyAge: ageInWeeks }, { new: true })
@@ -128,6 +126,8 @@ module.exports.food = (req, res) => {
 }
 
 module.exports.getFood = async (req, res) => {
+  const user = req.session.user;
+  console.log(user)
   const foodQuery = req.query.foodSearch;
   let edamamCall = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&ingr=${foodQuery}&app_id=${process.env.FOOD_ID}&app_key=${process.env.FOOD_KEY}`
   let recipeCall = `https://api.edamam.com/search?q=${foodQuery}&app_id=${process.env.RECIPE_ID}&app_key=${process.env.RECIPE_KEY}`
@@ -137,11 +137,18 @@ module.exports.getFood = async (req, res) => {
     const recipeResponse = ( await axios.get(recipeCall)).data;
     
     if (babyInfo.notRecommendedFoods.includes(foodResponse.hints[0].food.label)) {
-      res.render('food/foods', { response: foodResponse.hints, recipeResponse: recipeResponse.hits, recommended: false })
-      console.log(recipeResponse.hits)
+      res.render('food/foods', {
+        user: user, 
+        foodResponse: foodResponse.hints, 
+        recipeResponse: recipeResponse.hits, 
+        recommended: false })
+
     } else {
-      res.render('food/foods', { response: foodResponse.hints, recipeResponse: recipeResponse.hits, recommended: true })
-      console.log(recipeResponse.hits)
+      res.render('food/foods', {
+        user: user, 
+        foodResponse: foodResponse.hints, 
+        recipeResponse: recipeResponse.hits, 
+        recommended: true })
     }
 
   } catch (axiosErr) {

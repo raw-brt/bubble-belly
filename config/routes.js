@@ -5,8 +5,8 @@ const eventController = require('../controllers/event.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
 
 // Start route
-router.get('/', (_, res) => res.redirect('/start'))
-router.get('/start', authMiddleware.isNotAuthenticated, userController.start);
+// router.get('/', (_, res) => res.redirect('/start'))
+router.get('/', authMiddleware.isNotAuthenticated, userController.start);
 
 // Signup routes
 router.get('/user/new', userController.new);
