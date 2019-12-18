@@ -128,14 +128,22 @@ module.exports.food = (req, res) => {
 }
 
 module.exports.getFood = async (req, res) => {
- 
   const foodQuery = req.query.foodSearch;
-
-  let edamamCall = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&ingr=${foodQuery}&app_id=${FOOD_ID}&app_key=${FOOD_KEY}`
+  let edamamCall = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&ingr=${foodQuery}&app_id=${process.env.FOOD_ID}&app_key=${process.env.FOOD_KEY}`
+  let recipeCall = `https://api.edamam.com/search?q=${foodQuery}&app_id=${process.env.RECIPE_ID}&app_key=${process.env.RECIPE_KEY}`
 
   try {
-    const response = (await axios.get(edamamCall)).data;
-    res.render('food/foods', response.hints)
+    const foodResponse = (await axios.get(edamamCall)).data;
+    const recipeResponse = ( await axios.get(recipeCall)).data;
+    
+    if (babyInfo.notRecommendedFoods.includes(foodResponse.hints[0].food.label)) {
+      res.render('food/foods', { response: foodResponse.hints, recipeResponse: recipeResponse.hits, recommended: false })
+      console.log(recipeResponse.hits)
+    } else {
+      res.render('food/foods', { response: foodResponse.hints, recipeResponse: recipeResponse.hits, recommended: true })
+      console.log(recipeResponse.hits)
+    }
+
   } catch (axiosErr) {
       console.log(axiosErr)
   }

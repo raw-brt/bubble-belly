@@ -28,4 +28,6 @@ router.post('/user/:userid/profile', authMiddleware.isAuthenticated, userControl
 router.get('/user/:userid/food', authMiddleware.isAuthenticated, userController.food);
 router.get('/user/food/search', authMiddleware.isAuthenticated, userController.getFood);
 
+// Recipe search
+
 module.exports = router;

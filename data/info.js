@@ -6,3 +6,5 @@ module.exports.babyWeights = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 14, 28, 57, 71, 9
 
 // Estimated sizes (in centimeters) of the zygot-baby per week of pregnancy
 module.exports.babySizes = [0, 0, 0, 0, 0, 0.55, 0.64, 1.27, 2.54, 3.5, 4, 5.5, 8, 9, 10, 12, 13, 14, 15, 16.5, 27, 28, 28, 29, 33, 36, 37, 38, 40, 41, 41, 42, 43, 45, 46, 47, 48, 50, 52, 54];
+
+module.exports.notRecommendedFoods = ["alcohol", "cheese", "peanut", "crustacean"];

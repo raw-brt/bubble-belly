@@ -15,7 +15,7 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container container-fluid">
     <div class="row">
-      <p class="ml-3 mb-4" id="jumbotron-welcome">Food search</p>
+      <p class="ml-3 mb-4" id="jumbotron-welcome">Recipes search</p>
     </div>
   </div>
 </div>
@@ -24,10 +24,10 @@
 
 <div class="container">
   <div class="row" id="search-form">
-    <form action="/user/food/search" method="GET" class="mb-3 d-flex flex-column align-self-center" autocomplete="off">  
+    <form action="/user/recipe" method="GET" class="mb-3 d-flex flex-column align-self-center" autocomplete="off">  
       <div class="form-group d-flex flex-column align-self-center">
-        <label for="foodSearch"><i class="fas fa-search"></i>Search food</label>
-        <input name="foodSearch" type="text" class="form-control {{#if error.email }}is-invalid{{/if}}" id="foodSearch"
+        <label for="recipeSearch"><i class="fas fa-search"></i>Search recipe</label>
+        <input name="recipeSearch" type="text" class="form-control {{#if error.email }}is-invalid{{/if}}" id="foodSearch"
           placeholder="Enter food to search" value="">
         {{#if error.email}}
         <div class="invalid-feedback">
@@ -43,22 +43,14 @@
 </div>
 
 
+
+<p class="h3">What you searched for is: {{response.[0].food.label}}</p>
 {{#if recommended}}
-  <p class="h3">What you searched for is: {{response.[0].food.label}} <span class="badge badge pill badge-success">Recommended</span></p>
+  <p class="h5">Recommended!</p>
 {{else}}
-  <p class="h3">What you searched for is: {{response.[0].food.label}} <span class="badge badge pill badge-warning">Warning</span></p>
+  <p class="h5">Not Recommended!</p>
 {{/if}}
 
-<div class="container" id="food-recipes">
-  {{#each recipeResponse}}
-    <div class="row" id="food-recipes-row">
-        <div class="card-container col-sm-6 my-2">
-          <div class="card">
-            <img src="{{recipeResponse.[0].image}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{recipeResponse.[0].label}}</h5>
-              </div>
-          </div>
-        </div>
-  {{/each}}
+<div class="row d-flex flex-column align-self-center">
+  <a class="btn btn-primary" href="/user/recipes" role="button">Link</a>
 </div>
