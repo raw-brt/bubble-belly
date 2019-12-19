@@ -9,7 +9,7 @@ module.exports.isAuthenticated = (req, res, next) => {
 
 module.exports.isNotAuthenticated = (req, res, next) => {
   if (req.session.user) {
-    res.redirect('/');  
+    res.redirect(`/user/${req.session.user._id}`);
   } else {
     next()
   }

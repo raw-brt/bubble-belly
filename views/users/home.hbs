@@ -18,15 +18,15 @@
       <p class="ml-3 mb-4" id="jumbotron-welcome">Welcome, {{user.name}}</p>
     </div>
     <hr class="my-1 mx-2">
-    <div class="row">
+    <div class="row main">
       <div class="col" id="jumbotron-first-column">
         <p class="text-left my-4"><i class="fas fa-tape"></i>{{babySize}} cm.</p>
         <p class="text-left my-4"><i class="fas fa-baby"></i>{{babyWeight}} gr.</p>
       </div>
       <div class="col" id="jumbotron-second-column">
-        <p class="text-left my-4"><i class="fas fa-circle-notch"></i>{{user.bellyDiameter}} cm.</p>
-        <p class="text-left my-4"><i class="fas fa-weight"></i>{{user.weight}} gr.</p>
-        <p class="text-left my-4"><i class="fas fa-baby"></i>{{user.babyAge}} weeks</p>
+        <p class="text-left my-4 sizes-info"><i class="fas fa-circle-notch"></i>{{user.bellyDiameter}} cm.</p>
+        <p class="text-left my-4 sizes-info"><i class="fas fa-weight"></i>{{user.weight}} gr.</p>
+        <p class="text-left my-4 week">{{user.babyAge}}</p>
       </div>
     </div>
   </div>
@@ -37,10 +37,19 @@
     <div class="row">
       <div class="col-4 white-card d-flex flex-column justify-content-center align-items-center">
           <i class="icon-{{size}} ico-font"></i>
-          <p>{{user.babyComparison}}</p>
+          <p class="size">{{size}}</p>
       </div>
       <div class="col-6 white-card">
-        <p>This is a window for the events</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="thin">Cita ecografía</p>
+          <i class="fas fa-edit edit"></i>
+        </div>
+        <p>14:30</p>
+        <div class="d-flex justify-content-center align-items-center">
+            <i class="fas fa-circle dotted"></i>
+            <i class="fas fa-circle dotted clear"></i>
+            <i class="fas fa-circle dotted clear"></i>
+        </div>
       </div>
     </div>
   </div>

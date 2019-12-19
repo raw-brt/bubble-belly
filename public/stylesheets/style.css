@@ -251,13 +251,57 @@ label {
 /* Navigation bar */
 
 .nav-item > i {
-  font-size: 2em;
+  font-size: 1.6em;
 }
 
 /* Jumbotron */
 .jumbotron {
   background-color: #FF39A6;
   width: 100%;
+}
+
+.main {
+  position: relative;
+}
+
+.week {
+  font-weight: 800;
+  font-size: 200px;
+  line-height: 20px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.sizes-info {
+  color: #fff;
+  font-size: 1.1em;
+}
+
+.size {
+  color: #00CCB2;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.thin {
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.dotted {
+  font-size: 8px;
+  padding: 4px;
+  color: #FF59B3
+}
+
+.clear {
+  color: #FFCBE7;
+}
+
+.edit {
+  color: #FF59B3
 }
 
 #jumbotron-welcome {
@@ -271,10 +315,10 @@ label {
   font-size: 1.1em;
 }
 
-#jumbotron-second-column p {
+/* #jumbotron-second-column p {
   color: #fff;
   font-size: 1.1em;
-}
+} */
 
 .fa-tape , .fa-baby , .fa-circle-notch, .fa-weight  {
   color: #fff;
@@ -309,4 +353,24 @@ margin-bottom: 6em;
 /* Profile */
 #profile-form {
   margin-bottom: 6em;
+}
+
+.food-recomendation {
+  height: 64px;
+  border-bottom-left-radius: 16px;
+  color: white;
+}
+.warning {
+  background-color: #FF7426;
+}
+.recomended {
+  background-color: #00CCB2;
+}
+
+.food-recomendation > .fas {
+  color: white;
+} 
+
+.food-recomendation > p {
+  margin-bottom: 0;
 }

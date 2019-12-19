@@ -25,7 +25,7 @@ module.exports.home = (req, res, next) => {
         user: user, 
         size: babyInfo.sizes[user.babyAge - 1],
         babyWeight: babyInfo.babyWeights[user.babyAge - 1],
-        babySize: babyInfo.babySizes[user.babyAge - 1]
+        babySize: babyInfo.babySizes[user.babyAge - 1],
       })
     })
     .catch((error) => next(error))
@@ -122,13 +122,15 @@ module.exports.updateProfile = (req, res) => {
 };
 
 module.exports.food = (req, res) => {
-  res.render('food/foods');
+  const user = req.session.user;
+  res.render('food/foods', { user: user });
 }
 
 module.exports.getFood = async (req, res) => {
   const user = req.session.user;
-  console.log(user)
+  console.info(user)
   const foodQuery = req.query.foodSearch;
+  
   let edamamCall = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&ingr=${foodQuery}&app_id=${process.env.FOOD_ID}&app_key=${process.env.FOOD_KEY}`
   let recipeCall = `https://api.edamam.com/search?q=${foodQuery}&app_id=${process.env.RECIPE_ID}&app_key=${process.env.RECIPE_KEY}`
 

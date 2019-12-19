@@ -2,7 +2,7 @@
 
 <nav class="navbar d-flex flex-row justify-content-around fixed-bottom navbar-expand-lg navbar-light bg-light mt-2">
     <div class="navbar-nav d-flex flex-row justify-content-around">
-      <div class="px-4"><a class="nav-item nav-link active" href="http://localhost:3000/home/{{user._id}}"><i class="fas fa-home"></i><span class="sr-only">(current)</span></a></div>
+      <div class="px-4"><a class="nav-item nav-link active" href="http://localhost:3000/user/{{user._id}}"><i class="fas fa-home"></i><span class="sr-only">(current)</span></a></div>
       <div class="px-4"><a class="nav-item nav-link" href="http://localhost:3000/user/{{user._id}}/food"><i class="fas fa-utensils"></i></a></div>
       <div class="px-4"><a class="nav-item nav-link" href="#"><i class="fas fa-calendar-day"></i></a></div>
       <div class="px-4"><a class="nav-item nav-link" href="http://localhost:3000/user/{{user._id}}/profile"><i class="fas fa-user"></i></a></div>
@@ -23,9 +23,9 @@
 {{!-- Search input --}}
 
 <div class="container">
-  <div class="row" id="search-form">
-    <form action="/user/food/search" method="GET" class="mb-3 d-flex flex-column align-self-center" autocomplete="off">  
-      <div class="form-group d-flex flex-column align-self-center">
+  <div class="row d-flex flex-column justify-content-center align-item-center" id="search-form">
+    <form action="/user/food/search" method="GET" class="mb-3 d-flex flex-column justify-content-center align-item-center align-self-center" autocomplete="off">  
+      <div class="form-group d-flex flex-column justify-content-center align-item-center align-self-center">
         <label for="foodSearch"><i class="fas fa-search"></i>Search food</label>
         <input name="foodSearch" type="text" class="form-control {{#if error.email }}is-invalid{{/if}}" id="foodSearch"
           placeholder="Enter food to search" value="">
@@ -35,7 +35,7 @@
         </div>
         {{/if}}
       </div>
-      <div class="row d-flex flex-column align-self-center">
+      <div class="row d-flex flex-column justify-content-center align-item-center align-self-center">
         <button type="submit" class="btn-main">Search</button>
       </div>
     </form>
@@ -43,25 +43,42 @@
 </div>
 
 
-{{#if recommended}}
-  <p class="h3">What you searched for is: {{foodResponse.[0].food.label}} <span class="badge badge pill badge-success">Recommended</span></p>
-{{else}}
-  <p class="h3">What you searched for is: {{foodResponse.[0].food.label}} <span class="badge badge pill badge-warning">Warning</span></p>
+{{#if foodResponse}}
+  {{#if recommended}}
+    {{!-- <p class="h5">What you searched for is: {{foodResponse.[0].food.label}} <span class="badge badge pill badge-success">Recommended</span></p> --}}
+    <div class="container">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-10 food-recomendation recomended d-flex justify-content-center align-items-center">
+          <i class="fas fa-check-circle"></i>
+          <p>Recommended</p>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    {{!-- <p class="h5">What you searched for is: {{foodResponse.[0].food.label}} <span class="badge badge pill badge-warning">Warning</span></p> --}}
+    <div class="container">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-10 food-recomendation warning d-flex justify-content-center align-items-center">
+          <i class="fas fa-times-circle"></i>
+          <p>Warning</p>
+        </div>
+      </div>
+    </div>
+  {{/if}}
 {{/if}}
 
-<p class="h4">{{recipeResponse.[0].recipe.label}}</p>
-<img src="{{recipeResponse.[0].recipe.image}}" class="img-thumbnail">
-
-{{!-- <div class="container" id="food-recipes">
-  {{#each recipeResponse}}
-    <div class="row" id="food-recipes-row">
+<div class="container" id="food-recipes">
+    <div class="row " id="food-recipes-row">
+      {{#each recipeResponse as |response|}}
+      <a href="{{response.recipe.url}}">
         <div class="card-container col-sm-6 my-2">
           <div class="card">
-            <img src="{{recipeResponse.[0].recipe.image}}" class="card-img-top" alt="...">
+            <img src="{{response.recipe.image}}" class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title">{{recipeResponse.[0].recipe.label}}</h5>
+                <h5 class="card-title">{{response.recipe.label}}</h5>
               </div>
           </div>
         </div>
-  {{/each}}
-</div> --}}
+      </a>
+        {{/each}}
+</div>
