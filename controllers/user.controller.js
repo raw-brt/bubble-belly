@@ -143,7 +143,6 @@ module.exports.getFood = async (req, res) => {
         foodResponse: foodResponse.hints, 
         recipeResponse: recipeResponse.hits, 
         recommended: false })
-        console.log(foodResponse)
 
     } else {
       res.render('food/foods', {
@@ -151,7 +150,6 @@ module.exports.getFood = async (req, res) => {
         foodResponse: foodResponse.hints, 
         recipeResponse: recipeResponse.hits, 
         recommended: true })
-        console.log(foodResponse)
     }
 
   } catch (axiosErr) {
