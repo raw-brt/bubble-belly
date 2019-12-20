@@ -45,7 +45,6 @@
 
 {{#if foodResponse}}
   {{#if recommended}}
-    {{!-- <p class="h5">What you searched for is: {{foodResponse.[0].food.label}} <span class="badge badge pill badge-success">Recommended</span></p> --}}
     <div class="container">
       <div class="row d-flex justify-content-center align-items-center">
         <div class="col-10 food-recomendation recomended d-flex justify-content-center align-items-center">
@@ -55,7 +54,6 @@
       </div>
     </div>
   {{else}}
-    {{!-- <p class="h5">What you searched for is: {{foodResponse.[0].food.label}} <span class="badge badge pill badge-warning">Warning</span></p> --}}
     <div class="container">
       <div class="row d-flex justify-content-center align-items-center">
         <div class="col-10 food-recomendation warning d-flex justify-content-center align-items-center">
@@ -67,18 +65,24 @@
   {{/if}}
 {{/if}}
 
+{{#if foodResponse}}
+  <div class="row d-flex justify-content-center align-items-center">
+    <p class="h5 my-5 foods-query">Recipes</p>
+  </div>
+{{/if}}
+
 <div class="container" id="food-recipes">
-    <div class="row " id="food-recipes-row">
+    <div class="row d-flex justify-content-center align-items-center" id="food-recipes-row">
       {{#each recipeResponse as |response|}}
-      <a href="{{response.recipe.url}}">
-        <div class="card-container col-sm-6 my-2">
-          <div class="card">
-            <img src="{{response.recipe.image}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{response.recipe.label}}</h5>
-              </div>
+        <a href="{{response.recipe.url}}">
+          <div class="card-container col-sm-6 my-3">
+            <div class="card">
+              <img src="{{response.recipe.image}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{response.recipe.label}}</h5>
+                </div>
+            </div>
           </div>
-        </div>
-      </a>
-        {{/each}}
+        </a>
+      {{/each}}
 </div>

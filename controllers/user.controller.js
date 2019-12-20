@@ -128,7 +128,6 @@ module.exports.food = (req, res) => {
 
 module.exports.getFood = async (req, res) => {
   const user = req.session.user;
-  console.info(user)
   const foodQuery = req.query.foodSearch;
   
   let edamamCall = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&ingr=${foodQuery}&app_id=${process.env.FOOD_ID}&app_key=${process.env.FOOD_KEY}`
@@ -144,6 +143,7 @@ module.exports.getFood = async (req, res) => {
         foodResponse: foodResponse.hints, 
         recipeResponse: recipeResponse.hits, 
         recommended: false })
+        console.log(foodResponse)
 
     } else {
       res.render('food/foods', {
@@ -151,6 +151,7 @@ module.exports.getFood = async (req, res) => {
         foodResponse: foodResponse.hints, 
         recipeResponse: recipeResponse.hits, 
         recommended: true })
+        console.log(foodResponse)
     }
 
   } catch (axiosErr) {

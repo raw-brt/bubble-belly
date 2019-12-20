@@ -215,6 +215,7 @@ label {
   text-align: center;
   line-height: 48px;
   margin-top: 24px;
+  margin-bottom: 24px;
 }
 .btn-main:hover { 
   background-color: #FF39A6;
@@ -357,7 +358,7 @@ margin-bottom: 6em;
 
 .food-recomendation {
   height: 64px;
-  border-bottom-left-radius: 16px;
+  border-radius: 16px;
   color: white;
 }
 .warning {
@@ -373,4 +374,13 @@ margin-bottom: 6em;
 
 .food-recomendation > p {
   margin-bottom: 0;
+}
+
+.foods-query {
+  color: #FF39A6;
+  font-weight: 600;
+}
+
+.food-recipes {
+  margin-bottom: 5em;
 }
