@@ -114,7 +114,11 @@ module.exports.profile = (req, res, next) => {
 // Cómo hacer el buscador
 module.exports.updateProfile = (req, res) => {
   const { name, email, username, password, lastPeriod, weight, bellyDiameter } = req.body;
-  User.findByIdAndUpdate(req.params.userid, {$set:{name, email, username, password, lastPeriod, weight, bellyDiameter}}, {new: true})
+  User.findByIdAndUpdate(req.params.userid, 
+    { $set:{name, email, username, password, lastPeriod, weight, bellyDiameter }}, 
+    { new: true }
+    )
+
     .then(user => {
       res.render('user/profile', { user: user })
     })
@@ -159,5 +163,5 @@ module.exports.getFood = async (req, res) => {
 
 module.exports.logout = (req, res) => {
   req.session.destroy();
-  res.redirect('/start');
+  res.redirect('/login');
 };
